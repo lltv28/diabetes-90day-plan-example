@@ -5,3 +5,4 @@ __pycache__/
 wl-harness/node_modules/
 wl-harness/dist/
 wl-harness/preview.png
+wl-harness/shot-*.png

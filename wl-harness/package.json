@@ -7,18 +7,19 @@
     "build": "vite build"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
+    "date-fns": "4.1.0",
+    "lucide-react": "^0.513.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "recharts": "^3.8.1",
-    "date-fns": "4.1.0",
-    "lucide-react": "^0.513.0",
-    "clsx": "^2.1.1",
     "tailwind-merge": "^3.3.0"
   },
   "devDependencies": {
-    "vite": "^5.4.19",
+    "@tailwindcss/vite": "^4.1.8",
     "@vitejs/plugin-react": "^4.5.1",
+    "puppeteer-core": "^23.11.1",
     "tailwindcss": "^4.1.8",
-    "@tailwindcss/vite": "^4.1.8"
+    "vite": "^5.4.19"
   }
 }

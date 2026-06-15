@@ -7,6 +7,8 @@ export const wlTrpc = {
   useUtils: () => ({ plans: { listMine: { invalidate: () => {} } } }),
   plans: {
     updateTask: { useMutation: (_opts?: unknown) => noopMutation },
+    submitMetricCheckIn: { useMutation: (_opts?: unknown) => noopMutation },
+    completeMilestone: { useMutation: (_opts?: unknown) => noopMutation },
     getMetricCharts: { useQuery: (_args?: unknown, _opts?: unknown) => ({ data: undefined, isFetching: false }) },
   },
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
