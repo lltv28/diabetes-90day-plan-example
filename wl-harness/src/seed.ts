@@ -248,6 +248,47 @@ export function buildPlan(now = new Date()) {
   } as any;
 }
 
+// Home screen ("new chat") plan: exactly one assigned task for today.
+export function buildHomePlan(now = new Date()) {
+  const generatedPlan = buildGeneratedPlan();
+  const p1 = generatedPlan.phases[0];
+  const task = p1.milestones[0].tasks[1]; // "Log fasting blood glucose first thing each morning"
+
+  const tasks = [
+    makeTask({
+      id: `row-${task.id}`,
+      taskType: 'plan_task',
+      planPhaseId: p1.id,
+      planMilestoneId: p1.milestones[0].id,
+      sourceTaskId: task.id,
+      title: task.title,
+      cadenceLabel: task.cadenceLabel,
+      actionMode: task.actionMode,
+      actionPrompt: task.actionPrompt,
+      status: 'pending',
+      completedAt: null,
+      dueAt: iso(now),
+      sortOrder: 0,
+    }),
+  ];
+
+  return {
+    id: 'demo-plan-home',
+    status: 'active',
+    createdAt: iso(now),
+    currentPhaseId: 'phase-1',
+    generatedPlan,
+    tasks,
+    liveView: {
+      currentMilestone: { milestoneId: p1.milestones[0].id, nextExpectedCheckInAt: iso(now) },
+      metrics: [
+        metricFrom('metric-fasting-glucose', 'Fasting Blood Glucose', 'number', '95', 'daily', null, [], 'glu-today'),
+        metricFrom('metric-body-weight', 'Body Weight', 'weight', '185', 'weekly', ['monday'], [], null),
+      ],
+    },
+  } as any;
+}
+
 // Freshly-activated plan: Phase 1 current, nothing completed yet, baseline check-in.
 // This is what a client sees on day 1, right after signup.
 export function buildDay1Plan(now = new Date()) {

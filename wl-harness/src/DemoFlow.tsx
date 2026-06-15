@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 
 import WLPaywall from '@electron/pages/Paywall';
 import WLSignIn from '@electron/pages/SignIn';
+import WLHome from '@electron/pages/Home';
 import { RotateCcw } from 'lucide-react';
-
-import { App } from './App';
 
 const font = { fontFamily: 'var(--wl-font-family)' };
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -12,7 +11,7 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const STEPS = [
   { id: 'paywall', label: 'Choose a plan & pay', caption: 'Maria picks a plan and checks out.' },
   { id: 'signin', label: 'Verify by SMS', caption: 'A 2FA code is texted to her phone — she enters it to log in.' },
-  { id: 'plan', label: 'Her plan, day 1', caption: 'She lands on her personalized plan, ready for day one.' },
+  { id: 'plan', label: 'Home — day 1', caption: 'She lands on her home screen with her first task assigned.' },
 ] as const;
 
 // Set a React-controlled input's value so the component's state updates.
@@ -90,7 +89,7 @@ export function DemoFlow() {
       <div key={runId} className="absolute inset-0">
         {current.id === 'paywall' && <WLPaywall />}
         {current.id === 'signin' && <WLSignIn />}
-        {current.id === 'plan' && <App variant="day1" />}
+        {current.id === 'plan' && <WLHome />}
       </div>
 
       {/* faux checkout beat over the paywall */}

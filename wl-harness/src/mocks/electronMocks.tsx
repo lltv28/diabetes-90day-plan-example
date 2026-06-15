@@ -64,34 +64,19 @@ const DEMO_PRODUCT_STATE = {
   paidPlans: [
     {
       id: 'price_monthly',
-      name: 'Monthly',
-      description: 'Full access to your plan + AI coach',
+      name: 'Reverse 90',
+      description: 'Your personalized 90-day blood-sugar reset',
       amount_display: '$49/mo',
       billing_interval: 'monthly',
       plan_type: 'subscription',
       duration_value: null,
       duration_unit: null,
       cta_label: 'Get started',
-      feature_list: ['Personalized 90-day plan', 'Daily glucose tracking', 'AI coach over SMS', 'Weekly check-ins'],
-      is_active: true,
-      is_primary: false,
-      is_recommended: false,
-    },
-    {
-      id: 'price_yearly',
-      name: 'Yearly',
-      description: 'Best value — 2 months free',
-      amount_display: '$39/mo',
-      billing_interval: 'yearly',
-      plan_type: 'subscription',
-      duration_value: null,
-      duration_unit: null,
-      cta_label: 'Get started',
       feature_list: [
-        'Everything in Monthly',
-        'Priority AI coaching',
-        'Quarterly lab review',
-        'Save $120 per year',
+        'Personalized 90-day plan',
+        'Daily glucose tracking',
+        'AI coach over SMS',
+        'Weekly check-ins with Dr. Reyes',
       ],
       is_active: true,
       is_primary: true,
@@ -121,7 +106,7 @@ export const BrainPendingBadge = () => null;
 
 // ---- react-router-dom (we drive steps ourselves; navigation is a no-op) ----
 export const useNavigate = () => () => {};
-export const useLocation = () => ({ pathname: '/plan' });
+export const useLocation = () => ({ pathname: '/chat' });
 export const useSearchParams = () => [new URLSearchParams(''), () => {}] as const;
 export const Navigate = () => null;
 export const Link = ({ children, ...rest }: any) => createElement('a', rest, children);

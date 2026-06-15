@@ -7,16 +7,16 @@ client **Plans** view.
 
 > Sample/illustrative data only — not medical advice.
 
-SMS account-creation demo (real components): pay → SMS 2FA → plan day 1.
+SMS account-creation demo (real components): pay → SMS 2FA → home screen with first task.
 
 ![Paywall step](wl-plans-view/demo-paywall.png)
-![Plan day 1](wl-plans-view/demo-day1.png)
+![Home — day 1, 1 task](wl-plans-view/demo-day1.png)
 
 ## What's here
 
 | File | What it is |
 |------|------------|
-| `wl-plans-view/index.html` | **The SMS account-creation demo** — an auto-playing walkthrough: real **Paywall** → real **SignIn** (phone → SMS 2FA code → login) → the real **Plans** view at **day 1**. All real kodara components; payment/SMS/login are faked (no Whop/Twilio/Supabase). |
+| `wl-plans-view/index.html` | **The SMS account-creation demo** — an auto-playing walkthrough: real **Paywall** (one plan) → real **SignIn** (phone → SMS 2FA code → login) → the real **new-chat Home** screen with the client's first task assigned. All real kodara components; payment/SMS/login are faked (no Whop/Twilio/Supabase). |
 | `wl-plans-view/plans.html` | The standalone white-label **Plans** view (mid-program), rendered from the real components. |
 | `wl-harness/` | The Vite harness that produces both pages. It imports the real components straight from a kodara checkout, uses the real Tailwind v4 + recharts + `lib/plans` math, and mocks only the data layer (auth/checkout/SMS resolve to no-ops). `verify-demo.mjs` drives the autoplay headless to prove it works. See `wl-harness/README.md`. |
 | `plan-template.json` | The coach's plan template. Drop-in valid against Kodara's `PlanTemplate` schema (`planTemplateSchema`) — 13 weeks, 3 phases, 23 tasks, 2 metrics. |
