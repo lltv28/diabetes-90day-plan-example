@@ -247,3 +247,75 @@ export function buildPlan(now = new Date()) {
     },
   } as any;
 }
+
+// Freshly-activated plan: Phase 1 current, nothing completed yet, baseline check-in.
+// This is what a client sees on day 1, right after signup.
+export function buildDay1Plan(now = new Date()) {
+  const generatedPlan = buildGeneratedPlan();
+  const p1 = generatedPlan.phases[0];
+
+  const tasks: any[] = [];
+  let sort = 0;
+  p1.milestones[0].tasks.forEach((task: any) => {
+    tasks.push(
+      makeTask({
+        id: `row-${task.id}`,
+        taskType: 'plan_task',
+        planPhaseId: p1.id,
+        planMilestoneId: p1.milestones[0].id,
+        sourceTaskId: task.id,
+        title: task.title,
+        cadenceLabel: task.cadenceLabel,
+        actionMode: task.actionMode,
+        actionPrompt: task.actionPrompt,
+        status: 'pending',
+        completedAt: null,
+        dueAt: iso(now),
+        sortOrder: sort++,
+      }),
+    );
+  });
+  tasks.push(
+    makeTask({
+      id: 'row-glu-checkin',
+      taskType: 'metric_check_in',
+      planPhaseId: p1.id,
+      planMilestoneId: 'metric-check-ins',
+      sourceTaskId: null,
+      title: 'Check in: Fasting Blood Glucose',
+      cadenceLabel: 'Metric check-in',
+      actionMode: 'manual',
+      metricCheckInId: 'glu-today',
+      status: 'pending',
+      completedAt: null,
+      dueAt: iso(now),
+      sortOrder: 10000,
+    }),
+  );
+
+  const baselineGlu: CheckIn = {
+    id: 'glu-baseline',
+    checkInDate: localDate(now),
+    expectedAt: iso(now),
+    submittedAt: iso(now),
+    numericValue: 168,
+    completionValue: null,
+    note: 'Baseline',
+  };
+
+  return {
+    id: 'demo-plan-day1',
+    status: 'active',
+    createdAt: iso(now),
+    currentPhaseId: 'phase-1',
+    generatedPlan,
+    tasks,
+    liveView: {
+      currentMilestone: { milestoneId: p1.milestones[0].id, nextExpectedCheckInAt: iso(now) },
+      metrics: [
+        metricFrom('metric-fasting-glucose', 'Fasting Blood Glucose', 'number', '95', 'daily', null, [baselineGlu], 'glu-today'),
+        metricFrom('metric-body-weight', 'Body Weight', 'weight', '185', 'weekly', ['monday'], [], null),
+      ],
+    },
+  } as any;
+}

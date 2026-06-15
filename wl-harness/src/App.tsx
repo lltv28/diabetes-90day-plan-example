@@ -13,7 +13,7 @@ import { WLSidebarView, type WLSidebarViewModel } from '@electron/components/lay
 import { WLGradientBackground } from '@electron/components/common/WLGradientBackground';
 import { ChatsIcon, CoursesIcon, PenIcon, PlanIcon } from '@electron/components/common/WLIcons';
 
-import { buildPlan } from './seed';
+import { buildPlan, buildDay1Plan } from './seed';
 import { applyOptimisticCheckIns, type WLMetricCheckInSubmission } from './optimistic';
 
 const font = { fontFamily: 'var(--wl-font-family)' };
@@ -40,8 +40,8 @@ const sidebarModel: WLSidebarViewModel = {
   ],
 };
 
-export function App() {
-  const basePlan = useMemo(() => buildPlan(new Date()), []);
+export function App({ variant = 'mid' }: { variant?: 'mid' | 'day1' }) {
+  const basePlan = useMemo(() => (variant === 'day1' ? buildDay1Plan(new Date()) : buildPlan(new Date())), [variant]);
   const [optimisticCheckIns, setOptimisticCheckIns] = useState<Record<string, WLMetricCheckInSubmission>>({});
   const [isPlanDetailsOpen, setIsPlanDetailsOpen] = useState(false);
 

@@ -27,22 +27,32 @@ const mockOpenChat = {
 export default defineConfig({
   base: './',
   plugins: [mockOpenChat, react(), tailwindcss()],
+  build: {
+    rollupOptions: {
+      input: {
+        index: path.resolve(__dirname, 'index.html'), // the SMS onboarding demo
+        plans: path.resolve(__dirname, 'plans.html'), // the standalone plans view
+      },
+    },
+  },
   resolve: {
     dedupe: ['react', 'react-dom'],
     alias: [
       // mock only the data layer + navigation; everything else is the real component
       { find: '@electron/lib/trpc/client', replacement: path.resolve(__dirname, 'src/mocks/trpcClient.ts') },
       { find: '@electron/components/plans/useOpenWLPlanTaskChat', replacement: path.resolve(__dirname, 'src/mocks/useOpenWLPlanTaskChat.ts') },
-      // WLSidebar's smart-container deps (the view we render never calls them)
-      { find: '@electron/runtime/AppRuntimeContext', replacement: path.resolve(__dirname, 'src/mocks/sidebarDeps.tsx') },
-      { find: '@electron/contexts/WLAuthContext', replacement: path.resolve(__dirname, 'src/mocks/sidebarDeps.tsx') },
-      { find: '@electron/contexts/WLUIContext', replacement: path.resolve(__dirname, 'src/mocks/sidebarDeps.tsx') },
-      { find: '@electron/lib/openDashboardUrl', replacement: path.resolve(__dirname, 'src/mocks/sidebarDeps.tsx') },
-      { find: '@electron/lib/productCommerce', replacement: path.resolve(__dirname, 'src/mocks/sidebarDeps.tsx') },
-      { find: '@electron/queries/products', replacement: path.resolve(__dirname, 'src/mocks/sidebarDeps.tsx') },
-      { find: '@electron/hooks/useHasPlan', replacement: path.resolve(__dirname, 'src/mocks/sidebarDeps.tsx') },
-      { find: '@electron/pages/admin/BrainPendingBadge', replacement: path.resolve(__dirname, 'src/mocks/sidebarDeps.tsx') },
-      { find: 'react-router-dom', replacement: path.resolve(__dirname, 'src/mocks/sidebarDeps.tsx') },
+      // Mocked "smart" deps for the real Sidebar/Paywall/SignIn screens (auth, product,
+      // checkout, runtime, navigation). productCommerce stays REAL (pure helpers).
+      { find: '@electron/runtime/AppRuntimeContext', replacement: path.resolve(__dirname, 'src/mocks/electronMocks.tsx') },
+      { find: '@electron/runtime/runtimeConfig', replacement: path.resolve(__dirname, 'src/mocks/electronMocks.tsx') },
+      { find: '@electron/contexts/WLAuthContext', replacement: path.resolve(__dirname, 'src/mocks/electronMocks.tsx') },
+      { find: '@electron/contexts/WLUIContext', replacement: path.resolve(__dirname, 'src/mocks/electronMocks.tsx') },
+      { find: '@electron/lib/openDashboardUrl', replacement: path.resolve(__dirname, 'src/mocks/electronMocks.tsx') },
+      { find: '@electron/lib/openExternalUrl', replacement: path.resolve(__dirname, 'src/mocks/electronMocks.tsx') },
+      { find: '@electron/queries/products', replacement: path.resolve(__dirname, 'src/mocks/electronMocks.tsx') },
+      { find: '@electron/hooks/useHasPlan', replacement: path.resolve(__dirname, 'src/mocks/electronMocks.tsx') },
+      { find: '@electron/pages/admin/BrainPendingBadge', replacement: path.resolve(__dirname, 'src/mocks/electronMocks.tsx') },
+      { find: 'react-router-dom', replacement: path.resolve(__dirname, 'src/mocks/electronMocks.tsx') },
       { find: '@electron', replacement: EL },
       // type-only imports (stripped by esbuild); alias for safety
       { find: /^@api\/.*/, replacement: path.resolve(__dirname, 'src/mocks/empty.ts') },
@@ -57,6 +67,10 @@ export default defineConfig({
       { find: 'date-fns', replacement: nm('date-fns') },
       { find: 'clsx', replacement: nm('clsx') },
       { find: 'tailwind-merge', replacement: nm('tailwind-merge') },
+      { find: 'sonner', replacement: nm('sonner') },
+      { find: 'class-variance-authority', replacement: nm('class-variance-authority') },
+      { find: '@radix-ui/react-slot', replacement: nm('@radix-ui/react-slot') },
+      { find: '@radix-ui/react-label', replacement: nm('@radix-ui/react-label') },
     ],
   },
 });

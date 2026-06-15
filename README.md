@@ -7,14 +7,18 @@ client **Plans** view.
 
 > Sample/illustrative data only — not medical advice.
 
-![White-label Plans view](wl-plans-view/preview.png)
+SMS account-creation demo (real components): pay → SMS 2FA → plan day 1.
+
+![Paywall step](wl-plans-view/demo-paywall.png)
+![Plan day 1](wl-plans-view/demo-day1.png)
 
 ## What's here
 
 | File | What it is |
 |------|------------|
-| `wl-plans-view/` | **The showcase** — the built white-label client **Plans** view. This is a real Vite build that renders the **actual** kodara WL components, not a copy. Open `index.html` (or the live link). |
-| `wl-harness/` | The Vite harness that produces `wl-plans-view/`. It imports the real components straight from a kodara checkout (`WLPlanMetricsPanel`, `WLOverallPlanProgressCard`, `WLPhaseCard`, `WLTaskRow`, …), uses the real Tailwind v4 + recharts + `lib/plans` progress math, and mocks only the data layer. See `wl-harness/README.md`. |
+| `wl-plans-view/index.html` | **The SMS account-creation demo** — an auto-playing walkthrough: real **Paywall** → real **SignIn** (phone → SMS 2FA code → login) → the real **Plans** view at **day 1**. All real kodara components; payment/SMS/login are faked (no Whop/Twilio/Supabase). |
+| `wl-plans-view/plans.html` | The standalone white-label **Plans** view (mid-program), rendered from the real components. |
+| `wl-harness/` | The Vite harness that produces both pages. It imports the real components straight from a kodara checkout, uses the real Tailwind v4 + recharts + `lib/plans` math, and mocks only the data layer (auth/checkout/SMS resolve to no-ops). `verify-demo.mjs` drives the autoplay headless to prove it works. See `wl-harness/README.md`. |
 | `plan-template.json` | The coach's plan template. Drop-in valid against Kodara's `PlanTemplate` schema (`planTemplateSchema`) — 13 weeks, 3 phases, 23 tasks, 2 metrics. |
 | `data/check-ins.json` | 103 metric check-ins in the `client_plan_metric_check_ins` row shape (90 daily glucose + 13 weekly weight). |
 | `data/fasting-glucose.csv` | 90 daily fasting-glucose readings (`date,value_mg_dl,note`). |

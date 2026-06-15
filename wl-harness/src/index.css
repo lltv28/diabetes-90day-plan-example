@@ -1,9 +1,9 @@
 @import 'tailwindcss';
 
-/* Scan the real WL component source so Tailwind v4 JIT generates exactly the
-   utility classes those components use. Update if KODARA_REPO differs. */
-@source 'C:/tmp/kodara-review/apps/electron/src/components/plans';
-@source 'C:/tmp/kodara-review/apps/electron/src/lib';
+/* Scan the whole WL component tree so Tailwind v4 JIT generates exactly the
+   utility classes the real screens use (plans, paywall, sign-in, ui, layout).
+   Update the path if KODARA_REPO differs. */
+@source 'C:/tmp/kodara-review/apps/electron/src';
 @source './';
 
 html, body, #root { height: 100%; }
