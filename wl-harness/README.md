@@ -31,5 +31,6 @@ Pages serves).
 - This reproduces the **component rendering** 1:1. Matching a specific live tenant
   also needs that tenant's white-label theme + real plan data; here it's the default
   teal theme with seeded data.
-- The surrounding app shell (`WLMainLayout` / `WLSidebar` / `WLTopBar`) is out of
-  scope — only the Plans content is rendered.
+- The real `WLSidebarView` is rendered (fed a hand-built `WLSidebarViewModel`, so
+  the auth/agent-usage/runtime plumbing in the `WLSidebar` container is bypassed via
+  small no-op stubs). The desktop top bar and mobile drawer are still out of scope.
