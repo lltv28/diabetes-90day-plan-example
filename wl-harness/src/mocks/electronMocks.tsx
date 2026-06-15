@@ -65,7 +65,9 @@ const DEMO_PRODUCT_STATE = {
     {
       id: 'price_monthly',
       name: 'Reverse 90',
-      description: 'Your personalized 90-day blood-sugar reset',
+      // keep short: WLPaidPlansList renders the description with whitespace-nowrap,
+      // so a long string overflows the card border
+      description: '90-day blood-sugar reset',
       amount_display: '$49/mo',
       billing_interval: 'monthly',
       plan_type: 'subscription',
