@@ -2,14 +2,19 @@
 
 An example Kodara **client plan** for a metabolic-health doctor (Dr. Reyes) who helps
 clients reverse type 2 diabetes through lifestyle change, plus 90 days of realistic
-metric check-in data showing the progression.
+metric check-in data showing the progression — rendered in the actual white-label
+client **Plans** view.
 
 > Sample/illustrative data only — not medical advice.
+
+![White-label Plans view](wl-plans-view/preview.png)
 
 ## What's here
 
 | File | What it is |
 |------|------------|
+| `wl-plans-view/index.html` | **The showcase** — a faithful static replica of the white-label client **Plans** view (`apps/electron/src/pages/Plan.tsx` and its cards), seeded with this plan at a mid-program state. Open it in a browser. |
+| `build-wl-view.py` | Regenerates the WL Plans view from `data/check-ins.json` (`python build-wl-view.py`). |
 | `plan-template.json` | The coach's plan template. Drop-in valid against Kodara's `PlanTemplate` schema (`planTemplateSchema`) — 13 weeks, 3 phases, 23 tasks, 2 metrics. |
 | `data/check-ins.json` | 103 metric check-ins in the `client_plan_metric_check_ins` row shape (90 daily glucose + 13 weekly weight). |
 | `data/fasting-glucose.csv` | 90 daily fasting-glucose readings (`date,value_mg_dl,note`). |

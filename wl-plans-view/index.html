@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Plans — White-Label Client View (Example)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  :root {
+    --wl-font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --wl-bg-sidebar: rgba(0,180,212,0.05);
+  }
+  body { margin:0; background:#f6f8f9; font-family: var(--wl-font-family); }
+  .wl-shell { display:flex; min-height:100vh; }
+  .wl-side { width:240px; flex-shrink:0; background:var(--wl-bg-sidebar); border-right:1px solid rgba(26,26,26,0.06); padding:20px 14px; }
+  .wl-side .brand { display:flex; align-items:center; gap:10px; font-weight:600; color:rgba(26,26,26,0.82); font-size:15px; margin-bottom:24px; }
+  .wl-side .logo { width:28px; height:28px; border-radius:8px; background:linear-gradient(135deg,#b7f1ff,#00b4d4); }
+  .wl-nav a { display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:8px; font-size:14px; color:rgba(26,26,26,0.6); text-decoration:none; margin-bottom:2px; }
+  .wl-nav a.active { background:rgba(0,175,208,0.06); color:#008ba7; font-weight:500; }
+  @media (max-width: 880px) { .wl-side { display:none; } }
+</style>
+</head>
+<body>
+<div class="wl-shell">
+  <aside class="wl-side">
+    <div class="brand"><span class="logo"></span> Thrive Health</div>
+    <nav class="wl-nav">
+      <a href="#"><i data-lucide="message-circle" style="width:16px;height:16px"></i> Chat</a>
+      <a href="#" class="active"><i data-lucide="list-checks" style="width:16px;height:16px"></i> Plan</a>
+      <a href="#"><i data-lucide="folder" style="width:16px;height:16px"></i> Library</a>
+      <a href="#"><i data-lucide="settings" style="width:16px;height:16px"></i> Settings</a>
+    </nav>
+  </aside>
+
+  <div class="flex-1 min-h-0 overflow-y-auto">
+    <div class="mx-auto w-full max-w-[800px] px-6 py-8">
+      <main class="min-w-0 space-y-6">
+
+        <!-- WLPlanMetricsPanel -->
+        <section class="space-y-2" aria-label="Metrics">
+          <div class="flex items-center justify-between gap-3">
+            <h2 class="text-[16px] font-normal leading-6 tracking-[-0.5px] text-black" style="font-family:var(--wl-font-family)">Impact overtime</h2>
+          </div>
+          <div class="grid grid-cols-4 gap-2" role="tablist" aria-label="Metric charts">
+            <button class="col-span-2 h-[88px] cursor-pointer flex flex-col justify-center gap-0 rounded-[16px] border border-[rgba(26,26,26,0.18)] bg-[#fafafa] p-4 text-left" style="font-family:var(--wl-font-family)">
+              <span class="block truncate text-[12px] font-medium leading-4 tracking-[-0.15px] text-[rgba(26,26,26,0.6)]">Fasting Blood Glucose</span>
+              <span class="block truncate text-[32px] font-normal leading-10 tracking-[-0.5px] text-[rgba(26,26,26,0.8)]">106</span>
+            </button>
+            <button class="col-span-2 h-[88px] cursor-pointer flex flex-col justify-center gap-0 rounded-[16px] border border-[rgba(26,26,26,0.09)] bg-[#fafafa] p-4 text-left hover:border-[rgba(26,26,26,0.14)]" style="font-family:var(--wl-font-family)">
+              <span class="block truncate text-[12px] font-medium leading-4 tracking-[-0.15px] text-[rgba(26,26,26,0.6)]">Body Weight</span>
+              <span class="block truncate text-[32px] font-normal leading-10 tracking-[-0.5px] text-[rgba(26,26,26,0.8)]">194.1 lb</span>
+            </button>
+          </div>
+
+          <div class="relative aspect-[680/288] min-h-[260px] w-full overflow-hidden rounded-[20px] border border-[rgba(26,26,26,0.09)] bg-[#fafafa]">
+            <div class="absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-4 p-5">
+              <div class="flex flex-col gap-0.5">
+                <span class="text-[12px] font-medium leading-4 tracking-[-0.15px] text-[rgba(26,26,26,0.6)]" style="font-family:var(--wl-font-family)">Current</span>
+                <div class="flex items-center gap-2">
+                  <span class="text-[16px] font-medium leading-6 tracking-[-0.15px] text-[rgba(26,26,26,0.8)]" style="font-family:var(--wl-font-family)">106 mg/dL</span>
+                  <span class="inline-flex items-center gap-0.5 rounded-full py-0.5 pl-1 pr-1.5 bg-[rgba(16,104,68,0.06)]" style="font-family:var(--wl-font-family)">
+                    <i data-lucide="trending-up" class="size-4 text-[rgba(16,104,68,0.92)]"></i>
+                    <span class="text-[12px] font-medium leading-4 tracking-[-0.15px] text-[rgba(16,104,68,0.92)]">7%</span>
+                  </span>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="flex items-center gap-1.5"><span class="block h-px w-6 border-t border-dashed" style="border-top-color:#818cf8"></span>
+                  <span class="text-[14px] font-medium leading-5 tracking-[-0.15px] text-[rgba(26,26,26,0.6)]" style="font-family:var(--wl-font-family)">Projected</span></div>
+                <div class="flex items-center gap-1.5"><span class="block h-0.5 w-6 rounded-full" style="background:#818cf8"></span>
+                  <span class="text-[14px] font-medium leading-5 tracking-[-0.15px] text-[rgba(26,26,26,0.6)]" style="font-family:var(--wl-font-family)">Actual</span></div>
+              </div>
+            </div>
+            <svg viewBox="0 0 680 288" width="100%" height="100%" preserveAspectRatio="none" aria-label="Fasting Blood Glucose chart">
+  <defs>
+    <linearGradient id="wlfill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <line x1="56" y1="262.0" x2="656" y2="262.0" stroke="rgba(26,26,26,0.07)" stroke-width="1"/><line x1="56" y1="205.3" x2="656" y2="205.3" stroke="rgba(26,26,26,0.07)" stroke-width="1"/><line x1="56" y1="148.7" x2="656" y2="148.7" stroke="rgba(26,26,26,0.07)" stroke-width="1"/><line x1="56" y1="92.0" x2="656" y2="92.0" stroke="rgba(26,26,26,0.07)" stroke-width="1"/>
+  <path d="M 420.0 232.0 L 426.8 234.0 L 433.5 234.0 L 440.3 236.0 L 447.0 236.0 L 453.8 238.0 L 460.5 238.0 L 467.2 240.0 L 474.0 240.0 L 480.7 240.0 L 487.5 242.0 L 494.2 242.0 L 500.9 242.0 L 507.7 244.0 L 514.4 244.0 L 521.2 244.0 L 527.9 244.0 L 534.7 246.0 L 541.4 246.0 L 548.1 246.0 L 554.9 246.0 L 561.6 248.0 L 568.4 248.0 L 575.1 248.0 L 581.8 248.0 L 588.6 248.0 L 595.3 248.0 L 602.1 250.0 L 608.8 250.0 L 615.6 250.0 L 622.3 250.0 L 629.0 250.0 L 635.8 250.0 L 642.5 250.0 L 649.3 250.0 L 656.0 250.0 L 656.0 262.0 L 420.0 262.0 Z" fill="url(#wlfill)" fill-opacity="0.6"/>
+  <path d="M 56.0 110.0 L 62.7 114.0 L 69.5 120.0 L 76.2 118.0 L 83.0 130.0 L 89.7 136.0 L 96.4 126.0 L 103.2 144.0 L 109.9 148.0 L 116.7 150.0 L 123.4 152.0 L 130.2 150.0 L 136.9 108.0 L 143.6 154.0 L 150.4 174.0 L 157.1 180.0 L 163.9 174.0 L 170.6 168.0 L 177.3 180.0 L 184.1 174.0 L 190.8 172.0 L 197.6 200.0 L 204.3 194.0 L 211.1 190.0 L 217.8 190.0 L 224.5 200.0 L 231.3 188.0 L 238.0 190.0 L 244.8 198.0 L 251.5 216.0 L 258.2 204.0 L 265.0 222.0 L 271.7 232.0 L 278.5 178.0 L 285.2 212.0 L 292.0 208.0 L 298.7 212.0 L 305.4 228.0 L 312.2 214.0 L 318.9 230.0 L 325.7 214.0 L 332.4 216.0 L 339.1 224.0 L 345.9 220.0 L 352.6 222.0 L 359.4 226.0 L 366.1 224.0 L 372.9 216.0 L 379.6 226.0 L 386.3 238.0 L 393.1 236.0 L 399.8 230.0 L 406.6 236.0 L 413.3 216.0 L 420.0 232.0 L 420.0 262.0 L 56.0 262.0 Z" fill="url(#wlfill)"/>
+  <path d="M 420.0 232.0 L 426.8 234.0 L 433.5 234.0 L 440.3 236.0 L 447.0 236.0 L 453.8 238.0 L 460.5 238.0 L 467.2 240.0 L 474.0 240.0 L 480.7 240.0 L 487.5 242.0 L 494.2 242.0 L 500.9 242.0 L 507.7 244.0 L 514.4 244.0 L 521.2 244.0 L 527.9 244.0 L 534.7 246.0 L 541.4 246.0 L 548.1 246.0 L 554.9 246.0 L 561.6 248.0 L 568.4 248.0 L 575.1 248.0 L 581.8 248.0 L 588.6 248.0 L 595.3 248.0 L 602.1 250.0 L 608.8 250.0 L 615.6 250.0 L 622.3 250.0 L 629.0 250.0 L 635.8 250.0 L 642.5 250.0 L 649.3 250.0 L 656.0 250.0" fill="none" stroke="#818cf8" stroke-width="3" stroke-dasharray="6 8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 56.0 110.0 L 62.7 114.0 L 69.5 120.0 L 76.2 118.0 L 83.0 130.0 L 89.7 136.0 L 96.4 126.0 L 103.2 144.0 L 109.9 148.0 L 116.7 150.0 L 123.4 152.0 L 130.2 150.0 L 136.9 108.0 L 143.6 154.0 L 150.4 174.0 L 157.1 180.0 L 163.9 174.0 L 170.6 168.0 L 177.3 180.0 L 184.1 174.0 L 190.8 172.0 L 197.6 200.0 L 204.3 194.0 L 211.1 190.0 L 217.8 190.0 L 224.5 200.0 L 231.3 188.0 L 238.0 190.0 L 244.8 198.0 L 251.5 216.0 L 258.2 204.0 L 265.0 222.0 L 271.7 232.0 L 278.5 178.0 L 285.2 212.0 L 292.0 208.0 L 298.7 212.0 L 305.4 228.0 L 312.2 214.0 L 318.9 230.0 L 325.7 214.0 L 332.4 216.0 L 339.1 224.0 L 345.9 220.0 L 352.6 222.0 L 359.4 226.0 L 366.1 224.0 L 372.9 216.0 L 379.6 226.0 L 386.3 238.0 L 393.1 236.0 L 399.8 230.0 L 406.6 236.0 L 413.3 216.0 L 420.0 232.0" fill="none" stroke="#818cf8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="420.0" cy="232.0" r="6" fill="white" stroke="#818cf8" stroke-width="4"/>
+  <text x="46" y="266.0" text-anchor="end" font-size="12" font-weight="500" fill="rgba(26,26,26,0.6)" font-family="var(--wl-font-family)">91</text><text x="46" y="209.3" text-anchor="end" font-size="12" font-weight="500" fill="rgba(26,26,26,0.6)" font-family="var(--wl-font-family)">119</text><text x="46" y="152.7" text-anchor="end" font-size="12" font-weight="500" fill="rgba(26,26,26,0.6)" font-family="var(--wl-font-family)">148</text><text x="46" y="96.0" text-anchor="end" font-size="12" font-weight="500" fill="rgba(26,26,26,0.6)" font-family="var(--wl-font-family)">176</text><text x="56.0" y="282" text-anchor="middle" font-size="12" font-weight="500" fill="rgba(26,26,26,0.6)" font-family="var(--wl-font-family)">Mar 16</text><text x="177.3" y="282" text-anchor="middle" font-size="12" font-weight="500" fill="rgba(26,26,26,0.6)" font-family="var(--wl-font-family)">Apr 3</text><text x="298.7" y="282" text-anchor="middle" font-size="12" font-weight="500" fill="rgba(26,26,26,0.6)" font-family="var(--wl-font-family)">Apr 21</text><text x="420.0" y="282" text-anchor="middle" font-size="12" font-weight="500" fill="rgba(26,26,26,0.6)" font-family="var(--wl-font-family)">May 9</text><text x="541.4" y="282" text-anchor="middle" font-size="12" font-weight="500" fill="rgba(26,26,26,0.6)" font-family="var(--wl-font-family)">May 27</text><text x="656.0" y="282" text-anchor="middle" font-size="12" font-weight="500" fill="rgba(26,26,26,0.6)" font-family="var(--wl-font-family)">Jun 13</text>
+</svg>
+          </div>
+        </section>
+
+        <!-- greeting header -->
+        <header class="flex items-center justify-between gap-3">
+          <h1 class="text-[16px] font-normal leading-6 tracking-[-0.5px] text-black" style="font-family:var(--wl-font-family)">Hey Maria, here is your plan progress</h1>
+          <button class="shrink-0 text-[14px] font-medium leading-5 text-[#008ba7] hover:text-[#006f89] cursor-pointer" style="font-family:var(--wl-font-family)">See all plan</button>
+        </header>
+
+        <!-- WLOverallPlanProgressCard -->
+        <section aria-label="Overall plan progress" class="rounded-[24px] border border-[rgba(26,26,26,0.09)] bg-white px-5 py-5" style="font-family:var(--wl-font-family)">
+          <div class="flex items-center justify-between gap-4">
+            <h2 class="text-[14px] font-medium leading-5 tracking-[-0.15px] text-[rgba(26,26,26,0.8)]">Overall plan progress</h2>
+            <div class="text-[14px] font-medium leading-5 tracking-[-0.15px] text-[rgba(26,26,26,0.8)]">52%</div>
+          </div>
+          <div class="mt-4 h-[10px] overflow-hidden rounded-full bg-[rgba(16,104,68,0.08)] shadow-[inset_0_0_1px_rgba(26,26,26,0.16)]">
+            <div class="h-full rounded-full bg-gradient-to-r from-[#18c280] to-[#108844] shadow-[inset_0_-1px_3px_rgba(26,26,26,0.18)]" style="width:52%"></div>
+          </div>
+          <div class="mt-4 flex flex-col gap-2 leading-5 tracking-[-0.15px] text-[rgba(26,26,26,0.6)] md:flex-row md:items-center md:justify-between">
+            <div class="text-[14px] font-normal">You have done 1 phase and 23 tasks</div>
+            <div class="inline-flex items-center gap-2 text-[14px] font-medium text-[rgba(26,26,26,0.6)]">
+              <i data-lucide="star" class="h-4 w-4 shrink-0" style="fill:rgba(26,26,26,0.6)"></i>
+              <span>Finish today's task to boost by 2%.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- WLPhaseCard -->
+        <section aria-label="Current phase" class="rounded-[20px] border border-[rgba(26,26,26,0.09)] bg-white px-5 py-5" style="font-family:var(--wl-font-family)">
+          <div class="flex items-start gap-4">
+            <div class="min-w-0 flex-1">
+              <span class="inline-flex items-center rounded-full px-1.5 py-0.5 text-[12px] font-medium leading-4 tracking-[-0.15px]" style="font-family:var(--wl-font-family);background:rgba(0,175,208,0.06);color:#008ba7">Phase</span>
+              <h2 class="mt-2 text-[14px] font-medium leading-5 tracking-[-0.15px] text-[rgba(26,26,26,0.8)]">Phase 2 — Rebuild</h2>
+              <p class="mt-0.5 text-[14px] font-normal leading-5 tracking-[-0.15px] text-[rgba(26,26,26,0.6)]">Now that the spikes are under control, build metabolic flexibility: low-glycemic plates, a 10-hour eating window, strength + zone-2 cardio, and the sleep and stress habits that quietly drive insulin resistance.</p>
+            </div>
+            <div class="flex shrink-0 items-center gap-2">
+              <div class="inline-flex items-center gap-1 rounded-full bg-[rgba(16,104,68,0.06)] px-2.5 py-1 text-[12px] font-medium leading-4 text-[rgba(16,104,68,0.92)]">
+                <i data-lucide="rocket" class="h-3.5 w-3.5"></i>46% Completed</div>
+              <button class="cursor-pointer rounded-full bg-[rgba(26,26,26,0.04)] p-0.5 text-[rgba(26,26,26,0.6)] hover:bg-[rgba(26,26,26,0.08)]"><i data-lucide="chevron-up" class="h-4 w-4"></i></button>
+            </div>
+          </div>
+          <div class="mt-4 h-[6px] overflow-hidden rounded-full bg-[rgba(26,26,26,0.06)]">
+            <div class="h-full rounded-full bg-gradient-to-r from-[#16a46c] to-[#108844]" style="width:46%"></div>
+          </div>
+
+          <div class="mt-6">
+            <span class="inline-flex items-center rounded-full px-1.5 py-0.5 text-[12px] font-medium leading-4 tracking-[-0.15px]" style="font-family:var(--wl-font-family);background:#fffbeb;color:#92400e">Milestone</span>
+            <div class="mt-2 flex w-full items-start gap-2 text-left">
+              <div class="min-w-0 flex-1">
+                <div class="text-[14px] font-medium leading-5 tracking-[-0.15px] text-[rgba(26,26,26,0.8)]">Low-glycemic eating</div>
+                <p class="mt-0.5 text-[14px] font-normal leading-5 tracking-[-0.15px] text-[rgba(26,26,26,0.6)]">Make every plate blood-sugar friendly and tighten the eating window.</p>
+              </div>
+              <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[rgba(26,26,26,0.04)] text-[rgba(26,26,26,0.6)]"><i data-lucide="chevron-up" class="h-4 w-4"></i></span>
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <div class="space-y-5">
+              <div>
+                <div class="mb-1 text-[10px] font-semibold uppercase leading-4 tracking-[0.8px] text-[rgba(26,26,26,0.6)]">TODAY</div>
+                <div><div class="group flex items-start gap-3 py-3 cursor-pointer"><div class="min-w-0 flex-1 text-left"><div class="text-[14px] font-medium leading-5 tracking-[-0.15px]" style="font-family:var(--wl-font-family);color:#008ba7">Check in: Fasting Blood Glucose</div></div><button class="shrink-0 cursor-pointer rounded-[8px] border border-[rgba(26,26,26,0.09)] bg-gradient-to-b from-[#fafafa] to-[#f5f5f5] px-3 py-1 text-[14px] font-medium leading-5 tracking-[-0.15px] text-[rgba(26,26,26,0.6)] hover:from-[#f5f5f5] hover:to-[#ededed] hover:text-[rgba(26,26,26,0.88)]" style="font-family:var(--wl-font-family)">Check in</button></div><div class="group flex items-start gap-3 py-3 cursor-pointer"><div class="min-w-0 flex-1 text-left"><div class="text-[14px] font-medium leading-5 tracking-[-0.15px]" style="font-family:var(--wl-font-family);color:#008ba7">Build each plate: protein + fiber + healthy fat, eat carbs last</div><div class="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px] font-medium leading-5 tracking-[-0.15px]"><span class="inline-flex items-center gap-1.5" style="font-family:var(--wl-font-family);color:#008ba7"><i data-lucide="sparkles" class="h-[14px] w-[14px]"></i>Suggest a protein-first dinner</span></div></div><button class="mt-1 shrink-0 cursor-pointer text-[rgba(26,26,26,0.4)] hover:text-[rgba(26,26,26,0.7)]"><i data-lucide="chevron-right" class="h-[22px] w-[22px]"></i></button></div><div class="group flex items-start gap-3 py-3"><div class="min-w-0 flex-1 text-left"><div class="text-[14px] font-medium leading-5 tracking-[-0.15px]" style="font-family:var(--wl-font-family);color:#008ba7">Eat within a 10-hour window (time-restricted eating)</div></div><button class="shrink-0 cursor-pointer whitespace-nowrap rounded-[8px] border border-[rgba(26,26,26,0.09)] bg-gradient-to-b from-[#fafafa] to-[#f5f5f5] px-3 py-1 text-[14px] font-medium leading-5 text-[rgba(26,26,26,0.6)] hover:from-[#f5f5f5] hover:to-[#ededed] hover:text-[rgba(26,26,26,0.88)]" style="font-family:var(--wl-font-family)">Mark as done</button></div><div class="group flex items-start gap-3 py-3"><div class="min-w-0 flex-1 text-left"><div class="text-[14px] font-normal leading-5 tracking-[-0.15px] text-[rgba(26,26,26,0.36)] line-through" style="font-family:var(--wl-font-family)">Continue logging fasting blood glucose each morning</div><div class="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px] font-medium leading-5 tracking-[-0.15px]"><span class="inline-flex items-center gap-1 text-[14px] font-medium leading-5" style="font-family:var(--wl-font-family);color:#008ba7"><i data-lucide="pen-line" class="h-4 w-4"></i>Undo</span></div></div></div></div>
+              </div>
+              <div>
+                <div class="mb-1 text-[10px] font-semibold uppercase leading-4 tracking-[0.8px] text-[rgba(26,26,26,0.6)]">UPCOMING</div>
+                <div><div class="group flex items-start gap-3 py-3"><div class="min-w-0 flex-1 text-left"><div class="text-[14px] font-medium leading-5 tracking-[-0.15px]" style="font-family:var(--wl-font-family);color:#008ba7">20-minute resistance / bodyweight strength session</div><div class="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px] font-medium leading-5 tracking-[-0.15px]"><span class="inline-flex items-center gap-1.5" style="font-family:var(--wl-font-family);color:rgba(26,26,26,0.5)"><i data-lucide="calendar-days" class="h-[15px] w-[15px]"></i>Tomorrow</span></div></div><button class="shrink-0 cursor-pointer whitespace-nowrap rounded-[8px] border border-[rgba(26,26,26,0.09)] bg-gradient-to-b from-[#fafafa] to-[#f5f5f5] px-3 py-1 text-[14px] font-medium leading-5 text-[rgba(26,26,26,0.6)] hover:from-[#f5f5f5] hover:to-[#ededed] hover:text-[rgba(26,26,26,0.88)]" style="font-family:var(--wl-font-family)">Mark as done</button></div><div class="group flex items-start gap-3 py-3 cursor-pointer"><div class="min-w-0 flex-1 text-left"><div class="text-[14px] font-medium leading-5 tracking-[-0.15px]" style="font-family:var(--wl-font-family);color:#008ba7">Grocery shop from the approved staples list</div><div class="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px] font-medium leading-5 tracking-[-0.15px]"><span class="inline-flex items-center gap-1.5" style="font-family:var(--wl-font-family);color:#008ba7"><i data-lucide="sparkles" class="h-[14px] w-[14px]"></i>Build this week's grocery list</span></div></div><button class="mt-1 shrink-0 cursor-pointer text-[rgba(26,26,26,0.4)] hover:text-[rgba(26,26,26,0.7)]"><i data-lucide="chevron-right" class="h-[22px] w-[22px]"></i></button></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 space-y-3">
+            <div class="border-t border-[rgba(26,26,26,0.08)] pt-6">
+              <span class="inline-flex items-center rounded-full px-1.5 py-0.5 text-[12px] font-medium leading-4 tracking-[-0.15px]" style="font-family:var(--wl-font-family);background:rgba(0,175,208,0.06);color:#008ba7">Milestone</span>
+              <div class="mt-2 flex items-start gap-2">
+                <div class="min-w-0 flex-1">
+                  <div class="text-[14px] font-medium leading-5 tracking-[-0.15px] text-[rgba(26,26,26,0.8)]">Strength + zone-2 cardio</div>
+                  <p class="mt-0.5 text-[14px] font-normal leading-5 tracking-[-0.15px] text-[rgba(26,26,26,0.6)]">Muscle is a glucose sink. Alternate resistance work with easy aerobic days.</p>
+                </div>
+              </div>
+            </div>
+            <div class="border-t border-[rgba(26,26,26,0.08)] pt-6">
+              <span class="inline-flex items-center rounded-full px-1.5 py-0.5 text-[12px] font-medium leading-4 tracking-[-0.15px]" style="font-family:var(--wl-font-family);background:rgba(0,175,208,0.06);color:#008ba7">Milestone</span>
+              <div class="mt-2 flex items-start gap-2">
+                <div class="min-w-0 flex-1">
+                  <div class="text-[14px] font-medium leading-5 tracking-[-0.15px] text-[rgba(26,26,26,0.8)]">Sleep &amp; stress</div>
+                  <p class="mt-0.5 text-[14px] font-normal leading-5 tracking-[-0.15px] text-[rgba(26,26,26,0.6)]">Protect sleep and downshift stress — both raise fasting glucose when neglected.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- WLCompletedPhasesSection (Phase 1 done) -->
+        <section aria-label="Completed phases" class="rounded-[20px] border border-[rgba(26,26,26,0.09)] bg-white px-5 py-4" style="font-family:var(--wl-font-family)">
+          <div class="flex items-center gap-3">
+            <span class="flex h-6 w-6 items-center justify-center rounded-full bg-[rgba(16,104,68,0.1)] text-[rgba(16,104,68,0.92)]"><i data-lucide="check" class="h-4 w-4"></i></span>
+            <div class="min-w-0 flex-1">
+              <div class="text-[14px] font-medium leading-5 tracking-[-0.15px] text-[rgba(26,26,26,0.8)]">Phase 1 — Stabilize</div>
+              <div class="text-[12px] font-normal leading-4 text-[rgba(26,26,26,0.5)]">Completed · 8 tasks</div>
+            </div>
+            <span class="text-[12px] font-medium text-[rgba(16,104,68,0.92)]">100%</span>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+</div>
+<script>lucide.createIcons();</script>
+</body>
+</html>
