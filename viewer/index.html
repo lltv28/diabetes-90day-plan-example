@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>90-Day Blood Sugar Reset — Example Progression</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root { color-scheme: light; }
+  body { margin: 0; font-family: -apple-system, Segoe UI, Roboto, sans-serif; color: #11261f; background: #f4f7f5; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 32px 20px 64px; }
+  h1 { font-size: 24px; margin: 0 0 4px; }
+  p.sub { margin: 0 0 24px; color: #5b6f66; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 28px; }
+  .card { background: #fff; border: 1px solid #e2eae6; border-radius: 12px; padding: 16px; }
+  .card .label { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: #7c8d85; }
+  .card .value { font-size: 26px; font-weight: 700; margin-top: 4px; }
+  .card .delta { font-size: 13px; color: #1f8a5b; margin-top: 2px; }
+  .chart-box { background: #fff; border: 1px solid #e2eae6; border-radius: 12px; padding: 20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>90-Day Blood Sugar Reset — Example Client Progression</h1>
+  <p class="sub">Dr. Reyes metabolic-health program. Sample data, illustrative only — not medical advice.</p>
+  <div class="cards" id="cards"></div>
+  <div class="chart-box"><canvas id="chart" height="160"></canvas></div>
+</div>
+<script>
+const D = {"labels": ["2026-03-16", "2026-03-17", "2026-03-18", "2026-03-19", "2026-03-20", "2026-03-21", "2026-03-22", "2026-03-23", "2026-03-24", "2026-03-25", "2026-03-26", "2026-03-27", "2026-03-28", "2026-03-29", "2026-03-30", "2026-03-31", "2026-04-01", "2026-04-02", "2026-04-03", "2026-04-04", "2026-04-05", "2026-04-06", "2026-04-07", "2026-04-08", "2026-04-09", "2026-04-10", "2026-04-11", "2026-04-12", "2026-04-13", "2026-04-14", "2026-04-15", "2026-04-16", "2026-04-17", "2026-04-18", "2026-04-19", "2026-04-20", "2026-04-21", "2026-04-22", "2026-04-23", "2026-04-24", "2026-04-25", "2026-04-26", "2026-04-27", "2026-04-28", "2026-04-29", "2026-04-30", "2026-05-01", "2026-05-02", "2026-05-03", "2026-05-04", "2026-05-05", "2026-05-06", "2026-05-07", "2026-05-08", "2026-05-09", "2026-05-10", "2026-05-11", "2026-05-12", "2026-05-13", "2026-05-14", "2026-05-15", "2026-05-16", "2026-05-17", "2026-05-18", "2026-05-19", "2026-05-20", "2026-05-21", "2026-05-22", "2026-05-23", "2026-05-24", "2026-05-25", "2026-05-26", "2026-05-27", "2026-05-28", "2026-05-29", "2026-05-30", "2026-05-31", "2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13"], "glucose": [167, 165, 162, 163, 157, 154, 159, 150, 148, 147, 146, 147, 168, 145, 135, 132, 135, 138, 132, 135, 136, 122, 125, 127, 127, 122, 128, 127, 123, 114, 120, 111, 106, 133, 116, 118, 116, 108, 115, 107, 115, 114, 110, 112, 111, 109, 110, 114, 109, 103, 104, 107, 104, 114, 106, 104, 107, 109, 118, 106, 108, 107, 101, 99, 105, 95, 101, 102, 104, 108, 102, 109, 102, 97, 97, 101, 108, 97, 98, 101, 95, 97, 96, 99, 96, 99, 102, 97, 99, 103], "weight": [214.5, null, null, null, null, null, null, 209.6, null, null, null, null, null, null, 205.4, null, null, null, null, null, null, 201.5, null, null, null, null, null, null, 199.9, null, null, null, null, null, null, 197.5, null, null, null, null, null, null, 196.2, null, null, null, null, null, null, 194.1, null, null, null, null, null, null, 194.0, null, null, null, null, null, null, 191.9, null, null, null, null, null, null, 192.1, null, null, null, null, null, null, 190.8, null, null, null, null, null, null, 189.9, null, null, null, null, null], "target": [95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95], "diabetic": [126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126, 126], "normal": [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], "summary": {"glucose_start_avg": 161, "glucose_end_avg": 99, "glucose_drop": 62, "est_a1c_start": 7.2, "est_a1c_end": 5.1, "weight_start": 214.5, "weight_end": 189.9, "weight_lost": 24.6}};
+const s = D.summary;
+document.getElementById('cards').innerHTML = [
+  ['Fasting glucose', s.glucose_start_avg + ' &rarr; ' + s.glucose_end_avg + ' mg/dL', '↓ ' + s.glucose_drop + ' mg/dL'],
+  ['Est. HbA1c', s.est_a1c_start + '% &rarr; ' + s.est_a1c_end + '%', 'diabetic → normal'],
+  ['Body weight', s.weight_start + ' &rarr; ' + s.weight_end + ' lbs', '↓ ' + s.weight_lost + ' lbs'],
+  ['Duration', '90 days', '13 weeks, 3 phases'],
+].map(c => '<div class="card"><div class="label">' + c[0] + '</div><div class="value">' + c[1] + '</div><div class="delta">' + c[2] + '</div></div>').join('');
+
+new Chart(document.getElementById('chart'), {
+  type: 'line',
+  data: {
+    labels: D.labels,
+    datasets: [
+      { label: 'Fasting glucose (mg/dL)', data: D.glucose, yAxisID: 'y', borderColor: '#1f8a5b', backgroundColor: 'rgba(31,138,91,.08)', borderWidth: 2, pointRadius: 0, tension: .3, fill: true },
+      { label: 'Body weight (lbs)', data: D.weight, yAxisID: 'y1', borderColor: '#c8791b', borderWidth: 2, pointRadius: 3, spanGaps: true, tension: .3 },
+      { label: 'Diabetic threshold (126)', data: D.diabetic, yAxisID: 'y', borderColor: '#d34b4b', borderWidth: 1, borderDash: [6,4], pointRadius: 0 },
+      { label: 'Normal ceiling (100)', data: D.normal, yAxisID: 'y', borderColor: '#9aa7a1', borderWidth: 1, borderDash: [3,3], pointRadius: 0 },
+      { label: 'Target (95)', data: D.target, yAxisID: 'y', borderColor: '#2f7d5b', borderWidth: 1, borderDash: [2,4], pointRadius: 0 },
+    ]
+  },
+  options: {
+    responsive: true,
+    interaction: { mode: 'index', intersect: false },
+    scales: {
+      x: { ticks: { maxTicksLimit: 13, autoSkip: true }, grid: { display: false } },
+      y: { title: { display: true, text: 'Fasting glucose (mg/dL)' }, suggestedMin: 80, suggestedMax: 180 },
+      y1: { position: 'right', title: { display: true, text: 'Weight (lbs)' }, grid: { drawOnChartArea: false }, suggestedMin: 180, suggestedMax: 218 },
+    },
+    plugins: { legend: { labels: { boxWidth: 18 } } }
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,333 @@
+{
+  "autoGenerateOnEnrollmentEvent": "onboarding_finished",
+  "durationWeeks": 13,
+  "defaultTaskCadence": "Daily",
+  "reminderDays": [0, 1, 2, 3, 4, 5, 6],
+  "reminderTime": "08:00",
+  "metrics": [
+    {
+      "label": "Fasting Blood Glucose",
+      "type": "numeric",
+      "valueFormat": "number",
+      "direction": "decrease",
+      "targetValue": "95",
+      "ratingMin": null,
+      "ratingMax": null,
+      "cadenceType": "daily",
+      "weeklyDays": null,
+      "mode": "exact"
+    },
+    {
+      "label": "Body Weight",
+      "type": "numeric",
+      "valueFormat": "weight",
+      "direction": "decrease",
+      "targetValue": "185",
+      "ratingMin": null,
+      "ratingMax": null,
+      "cadenceType": "weekly",
+      "weeklyDays": ["monday"],
+      "mode": "exact"
+    }
+  ],
+  "humanTouchpoints": [
+    {
+      "label": "Weekly coaching check-in",
+      "cadenceLabel": "Every Wednesday",
+      "description": "15-minute call with Dr. Reyes to review the week's glucose log, troubleshoot blockers, and adjust the plan.",
+      "mode": "direction"
+    },
+    {
+      "label": "Lab review",
+      "cadenceLabel": "Day 1 and Day 90",
+      "description": "Baseline and end-of-program lab draw (fasting glucose, HbA1c, lipid panel) reviewed together to quantify progress.",
+      "mode": "exact"
+    }
+  ],
+  "phases": [
+    {
+      "title": "Phase 1 — Stabilize",
+      "description": "Stop the spikes and start measuring. The goal of the first four weeks is to remove the biggest blood-sugar drivers (liquid sugar, refined-carb breakfasts) and build the daily glucose-logging habit so every later decision is data-driven.",
+      "durationLabel": "Weeks 1–4",
+      "durationDays": 28,
+      "mode": "exact",
+      "milestones": [
+        {
+          "title": "Baseline & daily monitoring",
+          "summary": "Get a clear starting picture and make morning glucose logging automatic.",
+          "chatInstructions": null,
+          "mode": "exact",
+          "tasks": [
+            {
+              "title": "Get baseline labs (fasting glucose, HbA1c, lipid panel)",
+              "cadenceLabel": "Day 1",
+              "scheduleType": "one_time",
+              "dueOffsetDays": 0,
+              "actionMode": "manual",
+              "mode": "exact"
+            },
+            {
+              "title": "Log fasting blood glucose first thing each morning",
+              "cadenceLabel": "Daily",
+              "scheduleType": "daily",
+              "dailyWeekdays": null,
+              "actionMode": "manual",
+              "mode": "exact"
+            },
+            {
+              "title": "Drink 16 oz of water before breakfast",
+              "cadenceLabel": "Daily",
+              "scheduleType": "daily",
+              "dailyWeekdays": null,
+              "actionMode": "manual",
+              "mode": "direction"
+            }
+          ]
+        },
+        {
+          "title": "Remove refined sugar",
+          "summary": "Cut the fastest blood-sugar spikers first: sugary drinks and refined-carb breakfasts.",
+          "chatInstructions": null,
+          "mode": "exact",
+          "tasks": [
+            {
+              "title": "No sugar-sweetened drinks (swap for water or sparkling water)",
+              "cadenceLabel": "Daily",
+              "scheduleType": "daily",
+              "dailyWeekdays": null,
+              "actionMode": "manual",
+              "mode": "exact"
+            },
+            {
+              "title": "Protein-first breakfast, no added sugar or refined carbs",
+              "cadenceLabel": "Daily",
+              "scheduleType": "daily",
+              "dailyWeekdays": null,
+              "actionMode": "manual",
+              "mode": "direction"
+            },
+            {
+              "title": "Plan and prep low-glycemic meals for the week",
+              "cadenceLabel": "Every Sunday",
+              "scheduleType": "weekly",
+              "weeklyDayOfWeek": 6,
+              "actionMode": "agent",
+              "actionPrompt": "Build a 7-day low-glycemic meal plan for a client reversing type 2 diabetes, using their food preferences. Protein + fiber + healthy fat at every meal, under 30g net carbs per meal. Include a grocery list.",
+              "mode": "direction"
+            }
+          ]
+        },
+        {
+          "title": "Move every day",
+          "summary": "Add a small, repeatable dose of movement that blunts post-meal glucose.",
+          "chatInstructions": null,
+          "mode": "direction",
+          "tasks": [
+            {
+              "title": "10-minute walk after dinner",
+              "cadenceLabel": "Daily",
+              "scheduleType": "daily",
+              "dailyWeekdays": null,
+              "actionMode": "manual",
+              "mode": "direction"
+            },
+            {
+              "title": "Weigh in (same scale, Monday morning)",
+              "cadenceLabel": "Every Monday",
+              "scheduleType": "weekly",
+              "weeklyDayOfWeek": 0,
+              "actionMode": "manual",
+              "mode": "exact"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Phase 2 — Rebuild",
+      "description": "Now that the spikes are under control, build metabolic flexibility: low-glycemic plates, a consistent eating window, strength training, and the sleep and stress habits that quietly drive insulin resistance.",
+      "durationLabel": "Weeks 5–9",
+      "durationDays": 35,
+      "mode": "direction",
+      "milestones": [
+        {
+          "title": "Low-glycemic eating",
+          "summary": "Make every plate blood-sugar friendly and tighten the eating window.",
+          "chatInstructions": null,
+          "mode": "direction",
+          "tasks": [
+            {
+              "title": "Build each plate: protein + fiber + healthy fat, eat carbs last",
+              "cadenceLabel": "Daily",
+              "scheduleType": "daily",
+              "dailyWeekdays": null,
+              "actionMode": "manual",
+              "mode": "direction"
+            },
+            {
+              "title": "Eat within a 10-hour window (time-restricted eating)",
+              "cadenceLabel": "Daily on weekdays",
+              "scheduleType": "daily",
+              "dailyWeekdays": [0, 1, 2, 3, 4],
+              "actionMode": "manual",
+              "mode": "direction"
+            },
+            {
+              "title": "Continue logging fasting blood glucose each morning",
+              "cadenceLabel": "Daily",
+              "scheduleType": "daily",
+              "dailyWeekdays": null,
+              "actionMode": "manual",
+              "mode": "exact"
+            }
+          ]
+        },
+        {
+          "title": "Strength + zone-2 cardio",
+          "summary": "Muscle is a glucose sink. Alternate resistance work with easy aerobic days.",
+          "chatInstructions": null,
+          "mode": "direction",
+          "tasks": [
+            {
+              "title": "20-minute resistance / bodyweight strength session",
+              "cadenceLabel": "Daily Mon/Wed/Fri",
+              "scheduleType": "daily",
+              "dailyWeekdays": [0, 2, 4],
+              "actionMode": "manual",
+              "mode": "direction"
+            },
+            {
+              "title": "30-minute brisk walk or zone-2 cardio",
+              "cadenceLabel": "Daily Tue/Thu/Sat",
+              "scheduleType": "daily",
+              "dailyWeekdays": [1, 3, 5],
+              "actionMode": "manual",
+              "mode": "direction"
+            }
+          ]
+        },
+        {
+          "title": "Sleep & stress",
+          "summary": "Protect sleep and downshift stress — both raise fasting glucose when neglected.",
+          "chatInstructions": null,
+          "mode": "direction",
+          "tasks": [
+            {
+              "title": "Lights out by 10:30pm (target 7.5+ hours sleep)",
+              "cadenceLabel": "Daily",
+              "scheduleType": "daily",
+              "dailyWeekdays": null,
+              "actionMode": "manual",
+              "mode": "direction"
+            },
+            {
+              "title": "5-minute breathing / stress downshift before bed",
+              "cadenceLabel": "Daily",
+              "scheduleType": "daily",
+              "dailyWeekdays": null,
+              "actionMode": "manual",
+              "mode": "direction"
+            },
+            {
+              "title": "Weekly coaching check-in call with Dr. Reyes",
+              "cadenceLabel": "Every Wednesday",
+              "scheduleType": "weekly",
+              "weeklyDayOfWeek": 2,
+              "actionMode": "manual",
+              "mode": "exact"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Phase 3 — Sustain",
+      "description": "Lock in the wins. Reintroduce a few foods while watching the glucose response, cement the habits that moved the numbers, and re-test labs to measure how far blood sugar has come.",
+      "durationLabel": "Weeks 10–13",
+      "durationDays": 28,
+      "mode": "direction",
+      "milestones": [
+        {
+          "title": "Reintroduce & test",
+          "summary": "Test tolerance for a few foods using glucose as the referee.",
+          "chatInstructions": null,
+          "mode": "direction",
+          "tasks": [
+            {
+              "title": "Reintroduce one food and log the 2-hour glucose response",
+              "cadenceLabel": "Every Saturday",
+              "scheduleType": "weekly",
+              "weeklyDayOfWeek": 5,
+              "actionMode": "manual",
+              "mode": "direction"
+            },
+            {
+              "title": "Continue morning fasting glucose log",
+              "cadenceLabel": "Daily",
+              "scheduleType": "daily",
+              "dailyWeekdays": null,
+              "actionMode": "manual",
+              "mode": "exact"
+            }
+          ]
+        },
+        {
+          "title": "Cement the habits",
+          "summary": "Keep the movement and eating patterns that did the work.",
+          "chatInstructions": null,
+          "mode": "direction",
+          "tasks": [
+            {
+              "title": "Hit daily step goal (8,000+ steps)",
+              "cadenceLabel": "Daily",
+              "scheduleType": "daily",
+              "dailyWeekdays": null,
+              "actionMode": "manual",
+              "mode": "direction"
+            },
+            {
+              "title": "Maintain eating window + protein-first plates",
+              "cadenceLabel": "Daily on weekdays",
+              "scheduleType": "daily",
+              "dailyWeekdays": [0, 1, 2, 3, 4],
+              "actionMode": "manual",
+              "mode": "direction"
+            },
+            {
+              "title": "Weigh in (Monday morning)",
+              "cadenceLabel": "Every Monday",
+              "scheduleType": "weekly",
+              "weeklyDayOfWeek": 0,
+              "actionMode": "manual",
+              "mode": "exact"
+            }
+          ]
+        },
+        {
+          "title": "Re-test & plan forward",
+          "summary": "Measure the result and build the maintenance plan.",
+          "chatInstructions": null,
+          "mode": "exact",
+          "tasks": [
+            {
+              "title": "Repeat labs (fasting glucose, HbA1c) to measure progress",
+              "cadenceLabel": "Day 89",
+              "scheduleType": "one_time",
+              "dueOffsetDays": 89,
+              "actionMode": "manual",
+              "mode": "exact"
+            },
+            {
+              "title": "Maintenance plan review call with Dr. Reyes",
+              "cadenceLabel": "Day 90",
+              "scheduleType": "one_time",
+              "dueOffsetDays": 90,
+              "actionMode": "manual",
+              "mode": "exact"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
