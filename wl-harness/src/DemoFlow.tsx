@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import WLPaywall from '@electron/pages/Paywall';
 import WLSignIn from '@electron/pages/SignIn';
 import WLHome from '@electron/pages/Home';
-import { RotateCcw } from 'lucide-react';
 
 const font = { fontFamily: 'var(--wl-font-family)' };
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -76,19 +75,11 @@ export function DemoFlow() {
     };
   }, [step, runId]);
 
-  const restart = () => {
-    setProcessing(false);
-    setRunId((r) => r + 1);
-    setStep(0);
-  };
-
   const current = STEPS[step];
 
   return (
     <div className="relative h-screen w-full overflow-hidden">
-      {/* Home is in-flow, so pad the bottom to keep its composer above the chrome.
-          Paywall/SignIn are centered, so the bottom chrome never clips their cards. */}
-      <div key={runId} className="absolute inset-0" style={current.id === 'plan' ? { paddingBottom: 72 } : undefined}>
+      <div key={runId} className="absolute inset-0">
         {current.id === 'paywall' && <WLPaywall />}
         {current.id === 'signin' && <WLSignIn />}
         {current.id === 'plan' && <WLHome />}
@@ -106,37 +97,6 @@ export function DemoFlow() {
         </div>
       )}
 
-      {/* demo chrome — pinned to the bottom so it never clips the screens' top cards */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[60] flex justify-center px-4 pb-4">
-        <div className="pointer-events-auto flex w-full max-w-[640px] items-center gap-4 rounded-full border border-[rgba(26,26,26,0.08)] bg-white/85 px-4 py-2 shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-md">
-          <div className="flex items-center gap-1.5">
-            {STEPS.map((s, i) => (
-              <span
-                key={s.id}
-                className="h-1.5 rounded-full transition-all"
-                style={{ width: i === step ? 22 : 8, background: i <= step ? '#00b4d4' : 'rgba(26,26,26,0.14)' }}
-              />
-            ))}
-          </div>
-          <div className="min-w-0 flex-1">
-            <div className="truncate text-[13px] font-semibold text-[rgba(26,26,26,0.85)]" style={font}>
-              {step + 1}. {current.label}
-            </div>
-            <div className="truncate text-[12px] text-[rgba(26,26,26,0.55)]" style={font}>
-              {current.caption}
-            </div>
-          </div>
-          <button
-            type="button"
-            onClick={restart}
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[rgba(0,180,212,0.1)] px-3 py-1.5 text-[12px] font-medium text-[#008ba7] transition-colors hover:bg-[rgba(0,180,212,0.18)] cursor-pointer"
-            style={font}
-          >
-            <RotateCcw className="h-3.5 w-3.5" />
-            Restart
-          </button>
-        </div>
-      </div>
     </div>
   );
 }
