@@ -1,2 +1,7 @@
 __pycache__/
 *.pyc
+
+# wl-harness build artifacts
+wl-harness/node_modules/
+wl-harness/dist/
+wl-harness/preview.png

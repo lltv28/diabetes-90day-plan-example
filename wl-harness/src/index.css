@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+
+/* Scan the real WL component source so Tailwind v4 JIT generates exactly the
+   utility classes those components use. Update if KODARA_REPO differs. */
+@source 'C:/tmp/kodara-review/apps/electron/src/components/plans';
+@source 'C:/tmp/kodara-review/apps/electron/src/lib';
+@source './';
+
+html, body, #root { height: 100%; }
+body { margin: 0; background: #f6f8f9; }

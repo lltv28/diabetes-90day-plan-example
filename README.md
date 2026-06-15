@@ -13,8 +13,8 @@ client **Plans** view.
 
 | File | What it is |
 |------|------------|
-| `wl-plans-view/index.html` | **The showcase** — a faithful static replica of the white-label client **Plans** view (`apps/electron/src/pages/Plan.tsx` and its cards), seeded with this plan at a mid-program state. Open it in a browser. |
-| `build-wl-view.py` | Regenerates the WL Plans view from `data/check-ins.json` (`python build-wl-view.py`). |
+| `wl-plans-view/` | **The showcase** — the built white-label client **Plans** view. This is a real Vite build that renders the **actual** kodara WL components, not a copy. Open `index.html` (or the live link). |
+| `wl-harness/` | The Vite harness that produces `wl-plans-view/`. It imports the real components straight from a kodara checkout (`WLPlanMetricsPanel`, `WLOverallPlanProgressCard`, `WLPhaseCard`, `WLTaskRow`, …), uses the real Tailwind v4 + recharts + `lib/plans` progress math, and mocks only the data layer. See `wl-harness/README.md`. |
 | `plan-template.json` | The coach's plan template. Drop-in valid against Kodara's `PlanTemplate` schema (`planTemplateSchema`) — 13 weeks, 3 phases, 23 tasks, 2 metrics. |
 | `data/check-ins.json` | 103 metric check-ins in the `client_plan_metric_check_ins` row shape (90 daily glucose + 13 weekly weight). |
 | `data/fasting-glucose.csv` | 90 daily fasting-glucose readings (`date,value_mg_dl,note`). |
