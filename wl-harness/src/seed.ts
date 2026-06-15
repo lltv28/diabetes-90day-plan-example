@@ -248,27 +248,44 @@ export function buildPlan(now = new Date()) {
   } as any;
 }
 
-// Home screen ("new chat") plan: exactly one assigned task for today.
+// Home screen ("new chat") plan: an actual AI-actionable task + the daily log task.
 export function buildHomePlan(now = new Date()) {
   const generatedPlan = buildGeneratedPlan();
   const p1 = generatedPlan.phases[0];
-  const task = p1.milestones[0].tasks[1]; // "Log fasting blood glucose first thing each morning"
 
   const tasks = [
+    // An actual plan task the AI coach completes (renders with the ✨ instruction + opens chat)
     makeTask({
-      id: `row-${task.id}`,
+      id: 'row-meal-prep',
       taskType: 'plan_task',
       planPhaseId: p1.id,
-      planMilestoneId: p1.milestones[0].id,
-      sourceTaskId: task.id,
-      title: task.title,
-      cadenceLabel: task.cadenceLabel,
-      actionMode: task.actionMode,
-      actionPrompt: task.actionPrompt,
+      planMilestoneId: 'p1-m2',
+      sourceTaskId: 'p1-m2-t3',
+      title: "Plan & prep this week's low-glycemic meals",
+      cadenceLabel: 'This week',
+      actionMode: 'agent',
+      actionPrompt:
+        "Build my low-glycemic meal plan and grocery list for the week\nProtein + fiber + healthy fat at every meal, under 30g net carbs.",
       status: 'pending',
       completedAt: null,
       dueAt: iso(now),
       sortOrder: 0,
+    }),
+    // The daily log task (manual, Mark as done)
+    makeTask({
+      id: 'row-log-glucose',
+      taskType: 'plan_task',
+      planPhaseId: p1.id,
+      planMilestoneId: 'p1-m1',
+      sourceTaskId: 'p1-m1-t2',
+      title: 'Log fasting blood glucose first thing each morning',
+      cadenceLabel: 'Daily',
+      actionMode: 'manual',
+      actionPrompt: null,
+      status: 'pending',
+      completedAt: null,
+      dueAt: iso(now),
+      sortOrder: 1,
     }),
   ];
 

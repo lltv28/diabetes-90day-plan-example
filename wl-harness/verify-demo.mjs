@@ -37,7 +37,7 @@ await page.screenshot({ path: 'shot-2-sms.png' });
 console.log('sms code state captured:', gotCode);
 
 // 3) Plan day 1 — wait for the plan greeting
-const gotPlan = await waitFor(() => document.body.innerText.includes('task to be done today'), 15000);
+const gotPlan = await waitFor(() => document.body.innerText.includes('to be done today'), 15000);
 await sleep(800);
 await page.screenshot({ path: 'shot-3-plan.png' });
 console.log('plan captured:', gotPlan);
