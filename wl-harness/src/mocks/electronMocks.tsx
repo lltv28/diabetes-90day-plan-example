@@ -17,12 +17,12 @@ export const useWLAuth = () => ({
   adminCapabilities: null,
   loading: false,
   signIn: resolve,
-  // brief delay so the SignIn screen shows its "sending…" state before the code field
+  // delay so the SignIn screen lingers on its "sending…" state before the code field
   sendPhoneLoginOtp: async () => {
-    await wait(450);
+    await wait(900);
   },
   verifyPhoneLoginOtp: async () => {
-    await wait(450);
+    await wait(800);
   },
   sendPhoneChangeOtp: resolve,
   verifyPhoneChangeOtp: resolve,

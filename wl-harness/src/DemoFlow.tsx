@@ -48,27 +48,27 @@ export function DemoFlow() {
     let cancelled = false;
     const alive = () => !cancelled;
     (async () => {
-      await sleep(1100);
+      await sleep(1700); // show the empty phone form
       if (!alive()) return;
       const phone = document.querySelector<HTMLInputElement>('#phone');
       if (phone) {
         setReactInput(phone, '+1 415 555 2671');
-        await sleep(500);
+        await sleep(1300); // pause on the entered phone number
         phone.closest('form')?.requestSubmit();
       }
-      for (let i = 0; i < 25 && alive(); i++) {
+      for (let i = 0; i < 30 && alive(); i++) {
         if (document.querySelector('#otpCode')) break;
         await sleep(150);
       }
-      await sleep(800);
+      await sleep(1700); // linger on the "code sent" state with the empty code field
       if (!alive()) return;
       const otp = document.querySelector<HTMLInputElement>('#otpCode');
       if (otp) {
         setReactInput(otp, '481920');
-        await sleep(1000);
+        await sleep(1800); // pause on the entered code
         otp.closest('form')?.requestSubmit();
       }
-      await sleep(1300);
+      await sleep(2200); // hold before moving on
       if (alive()) setStep(2);
     })();
     return () => {
@@ -86,7 +86,9 @@ export function DemoFlow() {
 
   return (
     <div className="relative h-screen w-full overflow-hidden">
-      <div key={runId} className="absolute inset-0">
+      {/* Home is in-flow, so pad the bottom to keep its composer above the chrome.
+          Paywall/SignIn are centered, so the bottom chrome never clips their cards. */}
+      <div key={runId} className="absolute inset-0" style={current.id === 'plan' ? { paddingBottom: 72 } : undefined}>
         {current.id === 'paywall' && <WLPaywall />}
         {current.id === 'signin' && <WLSignIn />}
         {current.id === 'plan' && <WLHome />}
@@ -104,8 +106,8 @@ export function DemoFlow() {
         </div>
       )}
 
-      {/* demo chrome */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-[60] flex justify-center px-4 pt-4">
+      {/* demo chrome — pinned to the bottom so it never clips the screens' top cards */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[60] flex justify-center px-4 pb-4">
         <div className="pointer-events-auto flex w-full max-w-[640px] items-center gap-4 rounded-full border border-[rgba(26,26,26,0.08)] bg-white/85 px-4 py-2 shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-md">
           <div className="flex items-center gap-1.5">
             {STEPS.map((s, i) => (
